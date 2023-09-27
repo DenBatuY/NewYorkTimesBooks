@@ -1,7 +1,8 @@
-package com.example.newyorktimesbooks
+package com.example.newyorktimesbooks.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.newyorktimesbooks.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
