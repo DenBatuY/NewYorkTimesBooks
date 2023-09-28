@@ -1,5 +1,6 @@
-package com.example.newyorktimesbooks.data
+package com.example.newyorktimesbooks.data.network
 
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -24,10 +25,10 @@ class ApiFactory {
             .addInterceptor(loggingInterceptor).build()
 
         private val retrofit =
-            Retrofit.Builder().baseUrl(BASE_URL)
+            Retrofit.Builder()
+                .baseUrl(BASE_URL)
                 .client(okHttpClient)
-                //.addCallAdapterFactory(json.asConverterFactory(contentType))
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(json.asConverterFactory(contentType))
                 .build()
 
         val apiService: ApiService = retrofit.create(ApiService::class.java)
