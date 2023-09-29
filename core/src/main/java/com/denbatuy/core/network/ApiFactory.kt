@@ -1,4 +1,4 @@
-package com.example.newyorktimesbooks.data.network
+package com.denbatuy.core.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -15,7 +15,7 @@ class ApiFactory {
         private val contentType = "application/json".toMediaType()
         private val json = Json { ignoreUnknownKeys = true }
 
-        private const val BASE_URL = "https://api.nytimes.com/svc/books/v3/"
+        private const val BASE_URL = "https://api.nytimes.com/"
 
         private val loggingInterceptor = HttpLoggingInterceptor().apply {
             level= HttpLoggingInterceptor.Level.BODY
