@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.denbatuy.core.navigation.navigator
 import com.denbatuy.core.observeWithLifecycle
+import com.example.newyorktimesbooks.domain.entitys.StateEnum.*
 import com.example.newyorktimesbooks.databinding.BooksListFragmentBinding
-import com.example.newyorktimesbooks.presentation.viewmodels.BooksListViewModel
 import com.example.newyorktimesbooks.presentation.adapters.books_adapter.BooksAdapter
+import com.example.newyorktimesbooks.presentation.booksListStates
+import com.example.newyorktimesbooks.presentation.viewmodels.BooksListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BooksListFragment : Fragment() {
@@ -40,6 +42,7 @@ class BooksListFragment : Fragment() {
         loadBooks()
         observe()
         openLink()
+        swipeRefresh()
     }
 
     private fun initAdapter() {
@@ -50,7 +53,7 @@ class BooksListFragment : Fragment() {
         categoryNameApi?.let { booksViewModel.loadBookByCategories(it) }
     }
 
-    private fun openLink(){
+    private fun openLink() {
         booksAdapter.openLink = {
             navigator().goToWebFragment(it)
         }
@@ -60,8 +63,18 @@ class BooksListFragment : Fragment() {
         binding.tvTitleBook.text = categoryNameTitle
         booksViewModel.getBooks.observeWithLifecycle(viewLifecycleOwner) { response ->
             response.ifSuccess {
-                booksAdapter.submitList(it) }
+                booksListStates(binding, SUCCESS, requireContext())
+                booksAdapter.submitList(it)
+            }
+            response.ifLoading { booksListStates(binding, LOADING, requireContext()) }
+            response.ifError { booksListStates(binding, ERROR, requireContext()) }
+            response.ifInternetError { booksListStates(binding, INTERNET_ERROR, requireContext()) }
+        }
+    }
 
+    private fun swipeRefresh() {
+        binding.swipeRefreshBooks.setOnRefreshListener {
+            loadBooks()
         }
     }
 
@@ -72,8 +85,8 @@ class BooksListFragment : Fragment() {
 
     companion object {
         private const val CATEGORY_NAME_FOR_API = "category_api"
-        private const val CATEGORY_NAME_FOR_TITLE = "category_api"
-        fun newInstance(categoryApi: String,categoryTitle: String) = BooksListFragment().apply {
+        private const val CATEGORY_NAME_FOR_TITLE = "category_title"
+        fun newInstance(categoryApi: String, categoryTitle: String) = BooksListFragment().apply {
             arguments = Bundle().apply {
                 putString(CATEGORY_NAME_FOR_API, categoryApi)
                 putString(CATEGORY_NAME_FOR_TITLE, categoryTitle)

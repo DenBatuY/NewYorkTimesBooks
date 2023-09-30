@@ -3,4 +3,9 @@
     <string name="newest_published_date">Newest Published Date :</string>
     <string name="oldest_published_date">Oldest Published Date :</string>
     <string name="buy_books">Buy books:</string>
+    <string name="internet_error_you_are_offline">Internet error, you are offline</string>
+    <string name="error_you_are_offline">Error, you are offline</string>
+    <string name="rank">"Rank: "</string>
+    <string name="author">"Author: "</string>
+    <string name="publisher">"Publisher: "</string>
 </resources>

@@ -69,6 +69,7 @@
         android:layout_marginTop="@dimen/half_padding"
         android:ellipsize="end"
         android:maxLines="3"
+        android:minLines="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_book"
         app:layout_constraintTop_toBottomOf="@id/tv_publisher"

@@ -1,6 +1,5 @@
 package com.example.newyorktimesbooks.data
 
-import android.util.Log
 import com.denbatuy.core.network.ApiService
 import com.example.newyorktimesbooks.domain.Repository
 import com.example.newyorktimesbooks.domain.entitys.BooksEntity
@@ -27,12 +26,10 @@ class RepositoryImpl(
                 if (entity != null)
                     categoriesState.emit(Resource.success(entity))
             } else throw Exception(response.message())
-            Log.d("myTest", "load body  ${response.code()}")
         } catch (e: IOException) {
             categoriesState.emit(Resource.internetError())
         } catch (e: Exception) {
             categoriesState.emit(Resource.error(Throwable(e.message)))
-            Log.d("myTest", "load error $e")
         }
     }
 
@@ -42,6 +39,7 @@ class RepositoryImpl(
 
     override suspend fun loadBooks(category: String) {
         try {
+            booksState.emit(Resource.loading())
             val response = service.loadBooksByCategory(categoryName = category)
             if (response.isSuccessful) {
                 val categoryName = response.body()?.resultsBooks?.listName ?: UNKNOWN_NAME
@@ -53,10 +51,8 @@ class RepositoryImpl(
             } else throw Exception(response.message())
         } catch (e: IOException) {
             booksState.emit(Resource.internetError())
-            Log.d("myTest", "load InternetError loadBooksByCategory $e")
         } catch (e: Exception) {
             booksState.emit(Resource.error(Throwable(e.message)))
-            Log.d("myTest", "load error loadBooksByCategory $e")
         }
     }
 

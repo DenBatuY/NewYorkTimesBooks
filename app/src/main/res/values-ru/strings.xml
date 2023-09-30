@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">New York Times Books</string>
+    <string name="newest_published_date">Последняя дата публикации :</string>
+    <string name="oldest_published_date">Первая дата публикации :</string>
+    <string name="buy_books">Купить книги:</string>
+    <string name="internet_error_you_are_offline">Отутствует интернет соединение, вы offline</string>
+    <string name="error_you_are_offline">Ошибка, вы offline</string>
+    <string name="rank">"Рейтинг: "</string>
+    <string name="author">"Автор: "</string>
+    <string name="publisher">"Издатель: "</string>
+</resources>

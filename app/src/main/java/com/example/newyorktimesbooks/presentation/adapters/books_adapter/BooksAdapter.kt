@@ -1,5 +1,6 @@
 package com.example.newyorktimesbooks.presentation.adapters.books_adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -25,18 +26,18 @@ class BooksAdapter : ListAdapter<BooksEntity, BooksViewHolder>(BooksDiffUtilCall
             Glide.with(root).load(book.book_image).error(R.drawable.book).into(ivBook)
             tvDescription.text = book.description
             tvBookTitle.text = book.title
-            tvRank.text = String.format("%s%s", RANK, book.rank)
-            tvAuthor.text = String.format("%s%s", AUTHOR, book.author)
-            tvPublisher.text = String.format("%s%s", PUBLISHER, book.publisher)
+            tvRank.text = String.format("%s%s", getString(root.context, R.string.rank), book.rank)
+            tvAuthor.text =
+                String.format("%s%s", getString(root.context, R.string.author), book.author)
+            tvPublisher.text =
+                String.format("%s%s", getString(root.context, R.string.publisher), book.publisher)
             holder.linkAdapter.onClickLink = {
                 openLink?.invoke(it)
             }
         }
     }
 
-    companion object {
-        private const val RANK = "Rank: "
-        private const val AUTHOR = "Author: "
-        private const val PUBLISHER = "Publisher: "
+    private fun getString(context: Context, idString: Int): String {
+        return context.getString(idString)
     }
 }
