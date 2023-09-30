@@ -1,6 +1,6 @@
 # NewYorkTimesBooks#
-Testing app: Books store
-Technologies and libraries used:
+Testing app: Books store  
+Technologies and libraries used:  
 -coroutines
 -retrofit2 
 -kotlin serialization
