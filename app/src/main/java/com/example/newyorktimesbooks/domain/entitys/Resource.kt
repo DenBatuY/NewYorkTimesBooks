@@ -1,4 +1,4 @@
-package com.example.newyorktimesbooks.domain
+package com.example.newyorktimesbooks.domain.entitys
 
 /**
  * Класс ресурсов для получения данных и информации о процессе загрузки или произошедшей ошибке.

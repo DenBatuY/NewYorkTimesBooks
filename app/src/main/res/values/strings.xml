@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">New York Times Books</string>
+    <string name="newest_published_date">Newest Published Date :</string>
+    <string name="oldest_published_date">Oldest Published Date :</string>
+    <string name="buy_books">Buy books:</string>
 </resources>

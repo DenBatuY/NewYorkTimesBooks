@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding"
+    android:background="@drawable/rounded_bg_with_cunt"
+    android:layout_margin="@dimen/half_padding">
+
+    <TextView
+        android:id="@+id/tv_categories_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Hardcover Fiction" />
+
+    <TextView
+        android:id="@+id/tv_new_publish_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:text="@string/newest_published_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_categories_name" />
+
+    <TextView
+        android:id="@+id/tv_new_publish_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_new_publish_title"
+        app:layout_constraintStart_toEndOf="@+id/tv_new_publish_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_new_publish_title"
+        tools:text="2023-09-27" />
+
+    <TextView
+        android:id="@+id/tv_old_publish_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:text="@string/oldest_published_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_new_publish_title" />
+
+    <TextView
+        android:id="@+id/tv_old_publish_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_old_publish_title"
+        app:layout_constraintStart_toEndOf="@+id/tv_old_publish_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_old_publish_title"
+        tools:text="2023-09-27" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

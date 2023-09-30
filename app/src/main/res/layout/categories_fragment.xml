@@ -37,5 +37,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_error" />
+        app:layout_constraintTop_toBottomOf="@id/tv_error"
+        tools:listitem="@layout/categories_item" />
+
+    <include
+        android:id="@+id/progress_bar_categories"
+        layout="@layout/loading_progress_bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

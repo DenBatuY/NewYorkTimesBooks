@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin">8dp</dimen>
+    <dimen name="padding">4dp</dimen>
+    <dimen name="half_padding">2dp</dimen>
+    <dimen name="image_width">100dp</dimen>
+    <dimen name="image_height">150dp</dimen>
+    <dimen name="progress_bar">160dp</dimen>
+</resources>

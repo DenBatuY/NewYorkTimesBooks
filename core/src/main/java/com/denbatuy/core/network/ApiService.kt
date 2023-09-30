@@ -15,7 +15,7 @@ interface ApiService {
 
     @GET("/svc/books/v3//lists/current/{categoryName}.json")
     suspend fun loadBooksByCategory(
-        @Path("categoryName") categoryName: String = "hardcover-fiction",
+        @Path("categoryName") categoryName: String ,
         @Query("api-key") apiKey: String = API_KEY
     ): Response<BooksDto>
 

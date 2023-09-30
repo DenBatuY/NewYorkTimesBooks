@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Book(
+data class BooksListDto(
     @SerialName("age_group")
     val ageGroup: String,
     @SerialName("amazon_product_url")

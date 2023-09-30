@@ -1,4 +1,4 @@
-package com.example.newyorktimesbooks.domain
+package com.example.newyorktimesbooks.domain.entitys
 
 
 data class CategoriesEntity(

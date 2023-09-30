@@ -7,5 +7,6 @@ fun Fragment.navigator(): Navigator {
 }
 
 interface Navigator {
-    fun goToBookList(category:String)
+    fun goToBookList(categoryApi: String, categoryTitle: String)
+    fun goToWebFragment(link: String)
 }

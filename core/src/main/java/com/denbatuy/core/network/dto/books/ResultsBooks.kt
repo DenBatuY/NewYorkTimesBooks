@@ -9,7 +9,7 @@ data class ResultsBooks(
     @SerialName("bestsellers_date")
     val bestsellersDate: String,
     @SerialName("books")
-    val books: List<Book>,
+    val booksListDtos: List<BooksListDto>,
     @SerialName("display_name")
     val displayName: String,
     @SerialName("list_name")

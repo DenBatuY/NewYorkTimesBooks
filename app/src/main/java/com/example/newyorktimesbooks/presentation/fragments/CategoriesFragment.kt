@@ -1,12 +1,14 @@
-package com.example.newyorktimesbooks.presentation
+package com.example.newyorktimesbooks.presentation.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.newyorktimesbooks.R
+import com.denbatuy.core.navigation.navigator
+import com.denbatuy.core.observeWithLifecycle
 import com.example.newyorktimesbooks.databinding.CategoriesFragmentBinding
+import com.example.newyorktimesbooks.presentation.viewmodels.CategoriesViewModel
 import com.example.newyorktimesbooks.presentation.adapters.categories_adapter.CategoriesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,6 +32,17 @@ class CategoriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         loadCategories()
+        observe()
+        openCategories()
+    }
+
+    private fun observe() {
+        categoriesViewModel.category.observeWithLifecycle(viewLifecycleOwner) { response ->
+            response.ifSuccess { categoriesAdapter.submitList(it) }
+            response.ifLoading { }
+            response.ifInternetError { }
+            response.ifError { }
+        }
     }
 
     private fun initAdapter() {
@@ -38,6 +51,12 @@ class CategoriesFragment : Fragment() {
 
     private fun loadCategories() {
         categoriesViewModel.loadCategories()
+    }
+
+    private fun openCategories() {
+        categoriesAdapter.onClickCategory = {
+            navigator().goToBookList(it.listNameEncoded, it.listName)
+        }
     }
 
     override fun onDestroyView() {
