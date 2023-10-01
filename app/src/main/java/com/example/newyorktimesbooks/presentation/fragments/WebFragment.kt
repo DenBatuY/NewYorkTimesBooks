@@ -35,7 +35,7 @@ class WebFragment : Fragment() {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private fun initWebView(){
+    private fun initWebView() {
         webView = binding.webContainer
         webView.webViewClient = WebViewClient()
         webView.settings.javaScriptEnabled = true

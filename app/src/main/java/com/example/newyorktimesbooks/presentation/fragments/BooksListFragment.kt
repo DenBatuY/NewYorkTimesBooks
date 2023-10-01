@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.denbatuy.core.navigation.navigator
 import com.denbatuy.core.observeWithLifecycle
-import com.example.newyorktimesbooks.domain.entitys.StateEnum.*
 import com.example.newyorktimesbooks.databinding.BooksListFragmentBinding
+import com.example.newyorktimesbooks.domain.entitys.StateEnum.ERROR
+import com.example.newyorktimesbooks.domain.entitys.StateEnum.INTERNET_ERROR
+import com.example.newyorktimesbooks.domain.entitys.StateEnum.LOADING
+import com.example.newyorktimesbooks.domain.entitys.StateEnum.SUCCESS
 import com.example.newyorktimesbooks.presentation.adapters.books_adapter.BooksAdapter
 import com.example.newyorktimesbooks.presentation.booksListStates
 import com.example.newyorktimesbooks.presentation.viewmodels.BooksListViewModel
@@ -40,9 +43,10 @@ class BooksListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         loadBooks()
-        observe()
+        observeState()
         openLink()
         swipeRefresh()
+        observe()
     }
 
     private fun initAdapter() {
@@ -59,16 +63,21 @@ class BooksListFragment : Fragment() {
         }
     }
 
-    private fun observe() {
+    private fun observeState() {
         binding.tvTitleBook.text = categoryNameTitle
-        booksViewModel.getBooks.observeWithLifecycle(viewLifecycleOwner) { response ->
-            response.ifSuccess {
-                booksListStates(binding, SUCCESS, requireContext())
-                booksAdapter.submitList(it)
-            }
+        booksViewModel.getBooksState.observeWithLifecycle(viewLifecycleOwner) { response ->
+            response.ifSuccess { booksListStates(binding, SUCCESS, requireContext()) }
             response.ifLoading { booksListStates(binding, LOADING, requireContext()) }
             response.ifError { booksListStates(binding, ERROR, requireContext()) }
             response.ifInternetError { booksListStates(binding, INTERNET_ERROR, requireContext()) }
+        }
+    }
+
+    private fun observe() {
+        categoryNameTitle?.let {
+            booksViewModel.getBooks(it).observeWithLifecycle(viewLifecycleOwner) { listBooks ->
+                booksAdapter.submitList(listBooks)
+            }
         }
     }
 

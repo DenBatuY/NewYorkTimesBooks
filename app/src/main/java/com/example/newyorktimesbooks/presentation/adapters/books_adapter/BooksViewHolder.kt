@@ -12,8 +12,12 @@ class BooksViewHolder(val binding: BooksItemBinding) :
 
     init {
         binding.rvBuyLinks.layoutManager =
-            StaggeredGridLayoutManager( 2,
+            StaggeredGridLayoutManager( SPAN_COUNT,
                 LinearLayoutManager.HORIZONTAL)
         binding.rvBuyLinks.adapter = linkAdapter
+    }
+
+    companion object{
+        private const val SPAN_COUNT = 2
     }
 }

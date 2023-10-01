@@ -8,7 +8,10 @@ import androidx.fragment.app.Fragment
 import com.denbatuy.core.navigation.navigator
 import com.denbatuy.core.observeWithLifecycle
 import com.example.newyorktimesbooks.databinding.CategoriesFragmentBinding
-import com.example.newyorktimesbooks.domain.entitys.StateEnum.*
+import com.example.newyorktimesbooks.domain.entitys.StateEnum.ERROR
+import com.example.newyorktimesbooks.domain.entitys.StateEnum.INTERNET_ERROR
+import com.example.newyorktimesbooks.domain.entitys.StateEnum.LOADING
+import com.example.newyorktimesbooks.domain.entitys.StateEnum.SUCCESS
 import com.example.newyorktimesbooks.presentation.adapters.categories_adapter.CategoriesAdapter
 import com.example.newyorktimesbooks.presentation.categoryStates
 import com.example.newyorktimesbooks.presentation.viewmodels.CategoriesViewModel
@@ -34,20 +37,24 @@ class CategoriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         loadCategories()
-        observe()
+        observeState()
         openCategories()
         swipeRefresh()
+        observeCategories()
     }
 
-    private fun observe() {
-        categoriesViewModel.category.observeWithLifecycle(viewLifecycleOwner) { response ->
-            response.ifSuccess {
-                categoriesAdapter.submitList(it)
-                categoryStates(binding, SUCCESS, requireContext())
-            }
+    private fun observeState() {
+        categoriesViewModel.categoryState.observeWithLifecycle(viewLifecycleOwner) { response ->
+            response.ifSuccess { categoryStates(binding, SUCCESS, requireContext()) }
             response.ifLoading { categoryStates(binding, LOADING, requireContext()) }
             response.ifInternetError { categoryStates(binding, INTERNET_ERROR, requireContext()) }
             response.ifError { categoryStates(binding, ERROR, requireContext()) }
+        }
+    }
+
+    private fun observeCategories() {
+        categoriesViewModel.getCategories.observeWithLifecycle(viewLifecycleOwner) {
+            categoriesAdapter.submitList(it)
         }
     }
 
