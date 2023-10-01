@@ -1,6 +1,7 @@
 # NewYorkTimesBooks#
 Testing app: Books store  
 Technologies and libraries used:  
+-multimodularity
 -coroutines  
 -retrofit2   
 -kotlin serialization  
