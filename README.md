@@ -3,6 +3,7 @@ Testing app: Books store
 Technologies and libraries used:  
 -multimodularity
 -coroutines  
+-Flow
 -retrofit2   
 -kotlin serialization  
 -room  
