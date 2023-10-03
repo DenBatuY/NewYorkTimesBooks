@@ -7,9 +7,9 @@ import com.example.newyorktimesbooks.domain.entitys.BooksEntity
 import com.example.newyorktimesbooks.domain.entitys.CategoriesEntity
 import com.example.newyorktimesbooks.domain.entitys.Resource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 
@@ -18,8 +18,8 @@ class RepositoryImpl(
     private val mapper: Mapper,
     private val dao: Dao
 ) : Repository {
-    private val categoriesState = MutableSharedFlow<Resource<Unit>>()
-    private val booksState = MutableSharedFlow<Resource<Unit>>()
+    private val categoriesState = MutableStateFlow<Resource<Unit>>(Resource.loading())
+    private val booksState = MutableStateFlow<Resource<Unit>>(Resource.loading())
     override suspend fun loadCategories() {
         categoriesState.emit(Resource.loading())
         try {
@@ -45,7 +45,7 @@ class RepositoryImpl(
             }
         }
 
-    override fun getCategoriesState(): SharedFlow<Resource<Unit>> = categoriesState.asSharedFlow()
+    override fun getCategoriesState(): StateFlow<Resource<Unit>> = categoriesState.asStateFlow()
 
     override suspend fun loadBooks(category: String) {
         try {
@@ -67,8 +67,8 @@ class RepositoryImpl(
         }
     }
 
-    override fun getBooksListState(): SharedFlow<Resource<Unit>> =
-        booksState.asSharedFlow()
+    override fun getBooksListState(): StateFlow<Resource<Unit>> =
+        booksState.asStateFlow()
 
     override fun getBooksList(categoryName: String): Flow<List<BooksEntity>> =
         dao.getBooksList(categoryName).map {
