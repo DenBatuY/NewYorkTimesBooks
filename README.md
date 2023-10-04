@@ -1,7 +1,7 @@
 # NewYorkTimesBooks#
 Testing app: Books store  
 Technologies and libraries used:  
--multimodularity
+-multimodularity  
 -coroutines  
 -Flow  
 -retrofit2   
